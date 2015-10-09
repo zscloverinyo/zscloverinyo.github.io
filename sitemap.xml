@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
+
+    
   <url>
     <loc>http://yoursite.com/2015/10/08/AboutMe/</loc>
     <lastmod>2015-10-09T09:22:13.156Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/about/index.html</loc>
-    <lastmod>2015-10-09T09:09:30.209Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
-    <lastmod>2015-10-08T12:14:55.352Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    <lastmod>2015-10-08T12:14:39.281Z</lastmod>
-  </url>
-  
+    <data>
+        <display>
+        <title>Hello World!</title>
+        <pubTime>2015-10-08T11:24:58.000Z</pubTime>
+        
+        <tag>test </tag>
+         
+         
+           
+             
+              <breadCrumb title="blog" url="http://yoursite.com/categories/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
 </urlset>
