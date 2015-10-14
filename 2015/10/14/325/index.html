@@ -49,7 +49,7 @@ A:Gennady the Dentist题意：有N(N&amp;lt;=4000)个孩子去看病 编号从1~
 <meta property="og:description" content="这一场前四题的题目难度还可以 下面为前四题的简易题解
 
 A:Gennady the Dentist题意：有N(N&amp;lt;=4000)个孩子去看病 编号从1~n排成一列 每个孩子有三个属性v[i],d[i],p[i]表v[i]表示孩子哭声的大小d[i]表示孩子尖叫声的大小p[i]表示孩子的忍耐度每次一个孩子进去看病 发出v的哭声 后面排队的第I个孩子受到v-i+1的惊吓 忍耐度减少v-i+1如果第J">
-<meta property="og:updated_time" content="2015-10-14T02:45:29.020Z">
+<meta property="og:updated_time" content="2015-10-14T04:29:54.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Codeforces 325">
 <meta name="twitter:description" content="这一场前四题的题目难度还可以 下面为前四题的简易题解
@@ -364,6 +364,157 @@ LL a[<span class="number">5005</span>],b[<span class="number">5005</span>],c[<sp
     }
     <span class="keyword">return</span> <span class="number">0</span>;
 } 
+</code></pre><hr>
+<h1 id="C:Alice,_Bob,_Oranges_and_Apples">C:<a href="http://codeforces.com/contest/585/problem/C" target="_blank" rel="external">Alice, Bob, Oranges and Apples</a></h1><h2 id="题意:">题意:</h2><p>你有两个二元组(x1,y1),(x2,y2),每次你可以选择两种操作：<br>A:(x1,y1),(x2,y2)—&gt;(x1,y1),(x1+x2,y1+y2)<br>B:(x1,y1),(x2,y2)—&gt;(x1+x2,y1+y2),(x2,y2)<br>初始为(1,0)和(0,1)现在要求给出一个操作序列 使得达到最终态:x1+x2=n y1+y2=m<br>(n,m&lt;=1e18)</p>
+<h2 id="题解：-1">题解：</h2><p>很有趣的一道题 首先先来看无解的情况<br>若gcd(n,m)!=1 则一定无解</p>
+<p>我们接下来看有解的情况</p>
+<p>考虑一个2$\times$2的矩阵<br>$((x1,x2),(y1,y2))$<br>考虑B操作<br>$((x1,x2),(y1,y2)) \times ((1,0),(1,1)) = ((x1+x2,x2),(y1+y2,y2))$<br>我们令B=((1,0),(1,1))<br>考虑A操作<br>$((x1,x2),(y1,y2)) \times ((1,1),(0,1)) = ((x1,x1+x2),(y1,y1+y2))$<br>我们令A=((1,1),(0,1))<br>那么考虑一个函数F<br>$F(((x1,x2),(y1,y2))) = (y1+y2)/(x1+x2)$</p>
+<p>那么考虑一个状态S  $F(BS)=(x1+x2+y1+y2)/(x1+x2)=F(s)+1$<br>所以若$F(BS)=m/n$  $F(s)=(m-n)/n$<br>所以若$F(AS)=m/n$  $F(s)=m/(n-m)$<br>这样我们就可以知道对于任意时刻：<br>-若m&gt;n 那么第一步肯定是B 状态变为(n,m-n)<br>-若n&gt;m 那么第一部肯定是A 状态变为(n-m,m)</p>
+<p>//Latex的矩阵太难打啦！原谅我这个公式写的这么low吧。。用笔写一下就好啦！</p>
+<p>这样问题就变成了类似于求GCD得辗转相除 问题就得到完满解决啦</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;
+
+LL n,m;
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="built_in">scanf</span>(<span class="string">"%I64d%I64d"</span>,&amp;n,&amp;m);
+    <span class="keyword">if</span> (__gcd(n,m)!=<span class="number">1</span>)
+    {
+        <span class="built_in">printf</span>(<span class="string">"Impossible\n"</span>);
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">while</span> (n!=m)
+    {
+        <span class="keyword">if</span> (n&gt;m)
+        {
+            <span class="built_in">printf</span>(<span class="string">"%I64dA"</span>,(n-<span class="number">1</span>)/m);
+            n-=(n-<span class="number">1</span>)/m*m;
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="built_in">printf</span>(<span class="string">"%I64dB"</span>,(m-<span class="number">1</span>)/n);
+            m-=(m-<span class="number">1</span>)/n*n;
+        }
+    }
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>//此问题在具体数学中出现过 见具体数学第121页</p>
+<hr>
+<h1 id="D:Lizard_Era:_Beginning">D:<a href="http://codeforces.com/contest/585/problem/D" target="_blank" rel="external">Lizard Era: Beginning</a></h1><h2 id="题意：-1">题意：</h2><p>有N个任务(N&lt;=25)需要去完成 你有三个伙伴A,B,C 第N个任务带A去A的好感度会增加A[I] B,C同理<br>每个任务必须恰好带两个伙伴去完成 求一个方案使得所有任务完成后A,B,C三人的好感度相同,若存在多解输出好感度最大的</p>
+<h2 id="题解:">题解:</h2><p>看N&lt;=25不难想到搜索 然而3^n依然太大<br>于是考虑折半搜索<br>3^(n/2)大概是1000000左右 可以接受<br>现在的问题就变成了合并前后状态(a1,b1,c1)与(a2,b2,c2)使得$a1+a2=b1+b2=c1+c2$<br>整理一下可以得到$a2-b2=b1-a1,a2-c2=c1-a1$<br>所以只需要满足上面这两个要求就可以满足合并后三人好感度相同的要求<br>不难想到于是问题变成前半部分直接搜索得到(a1,b1,c1)这样的三元组 将它映射到三元组(a1-b1,a1-c1,a1)<br>后半部分直接搜索得到(a2,b2,c2)三元组后 查找前半部分存在的三元组(b2-a2,c2-a2,x)中x的最大值<br>于是我们用个map存一下三元组(a1-b1,a1-c1）这样的状态对应的最大的a1即可<br>//一开始我没有搜索而是用$3^n$这样表示的状态 然而这样需要乘以10的分解复杂度就TLE了QAQ</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;
+
+<span class="keyword">int</span> n;
+LL sum,ansx,ansy,ans=-<span class="number">1e18</span>;
+LL a[<span class="number">30</span>],b[<span class="number">30</span>],c[<span class="number">30</span>];
+LL dq,aa,bb,cc;
+<span class="built_in">map</span>&lt;pair&lt;LL,LL&gt;,LL&gt; mp;
+<span class="built_in">map</span>&lt;pair&lt;LL,LL&gt;,LL&gt; mp2;
+<span class="keyword">struct</span> Node
+{
+    LL x,y;
+    <span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span> &gt; (Node a,Node b)
+    {
+        <span class="keyword">return</span> a.x&gt;b.x;
+    }
+}now;
+LL f[<span class="number">30</span>];
+<span class="keyword">int</span> nn;
+<span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,LL aa,LL bb,LL cc,LL i)</span>
+</span>{
+    <span class="keyword">if</span> (x==nn+<span class="number">1</span>)
+    {
+        <span class="keyword">if</span> (mp.count(make_pair(aa-bb,aa-cc))==<span class="number">0</span>)
+        {
+            mp[make_pair(aa-bb,aa-cc)]=aa;
+            mp2[make_pair(aa-bb,aa-cc)]=i;
+        }
+        <span class="keyword">else</span>    
+        <span class="keyword">if</span> (mp[make_pair(aa-bb,aa-cc)]&lt;aa) 
+        {
+            mp[make_pair(aa-bb,aa-cc)]=aa;
+            mp2[make_pair(aa-bb,aa-cc)]=i;
+        }
+        <span class="keyword">return</span>;
+    }
+    dfs(x+<span class="number">1</span>,aa+a[x],bb+b[x],cc,i*<span class="number">3</span>);
+    dfs(x+<span class="number">1</span>,aa,bb+b[x],cc+c[x],i*<span class="number">3</span>+<span class="number">1</span>);
+    dfs(x+<span class="number">1</span>,aa+a[x],bb,cc+c[x],i*<span class="number">3</span>+<span class="number">2</span>);
+}
+<span class="function"><span class="keyword">void</span> <span class="title">Dfs</span><span class="params">(<span class="keyword">int</span> x,LL aa,LL bb,LL cc,LL i)</span>
+</span>{
+    <span class="keyword">if</span> (x==n+<span class="number">1</span>)
+    {
+        <span class="keyword">if</span> (mp.count(make_pair(bb-aa,cc-aa))==<span class="number">0</span>) <span class="keyword">return</span>;
+        dq=aa+mp[make_pair(bb-aa,cc-aa)];
+        <span class="keyword">if</span> (dq&gt;ans)
+        {
+            ans=dq;
+            ansx=mp2[make_pair(bb-aa,cc-aa)];
+            ansy=i;
+        }
+        <span class="keyword">return</span>;
+    }
+    Dfs(x+<span class="number">1</span>,aa+a[x],bb+b[x],cc,i*<span class="number">3</span>);
+    Dfs(x+<span class="number">1</span>,aa,bb+b[x],cc+c[x],i*<span class="number">3</span>+<span class="number">1</span>);
+    Dfs(x+<span class="number">1</span>,aa+a[x],bb,cc+c[x],i*<span class="number">3</span>+<span class="number">2</span>);
+}
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">scanf</span>(<span class="string">"%I64d%I64d%I64d"</span>,&amp;a[i],&amp;b[i],&amp;c[i]);
+    nn=n/<span class="number">2</span>;
+    <span class="comment">//0:12   1:23  2:13</span>
+    dfs(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);
+    Dfs(nn+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);
+    <span class="keyword">if</span> (ans==-<span class="number">1e18</span>) <span class="built_in">printf</span>(<span class="string">"Impossible\n"</span>);
+    <span class="keyword">else</span>
+    {
+        dq=ansx;
+        <span class="keyword">for</span> (<span class="keyword">int</span> j=nn;j&gt;=<span class="number">1</span>;--j)
+        {
+            f[j]=dq%<span class="number">3</span>;
+            dq/=<span class="number">3</span>;
+        }
+        dq=ansy;
+        <span class="keyword">for</span> (<span class="keyword">int</span> j=n;j&gt;=nn+<span class="number">1</span>;--j)
+        {
+            f[j]=dq%<span class="number">3</span>;
+            dq/=<span class="number">3</span>;
+
+        }
+        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)
+        {
+            <span class="keyword">if</span> (f[j]==<span class="number">0</span>) <span class="built_in">cout</span>&lt;&lt;<span class="string">"LM"</span>&lt;&lt;endl;
+            <span class="keyword">if</span> (f[j]==<span class="number">1</span>) <span class="built_in">cout</span>&lt;&lt;<span class="string">"MW"</span>&lt;&lt;endl;
+            <span class="keyword">if</span> (f[j]==<span class="number">2</span>) <span class="built_in">cout</span>&lt;&lt;<span class="string">"LW"</span>&lt;&lt;endl;
+        }
+    }
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
 </code></pre></span>
       
     </div>
@@ -520,7 +671,7 @@ LL a[<span class="number">5005</span>],b[<span class="number">5005</span>],c[<sp
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A:Gennady_the_Dentist"><span class="nav-number">1.</span> <span class="nav-text">A:Gennady the Dentist</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意："><span class="nav-number">1.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解："><span class="nav-number">1.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B:Phillip_and_Trains"><span class="nav-number">2.</span> <span class="nav-text">B:Phillip and Trains</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A:Gennady_the_Dentist"><span class="nav-number">1.</span> <span class="nav-text">A:Gennady the Dentist</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意："><span class="nav-number">1.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解："><span class="nav-number">1.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B:Phillip_and_Trains"><span class="nav-number">2.</span> <span class="nav-text">B:Phillip and Trains</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C:Alice,_Bob,_Oranges_and_Apples"><span class="nav-number">3.</span> <span class="nav-text">C:Alice, Bob, Oranges and Apples</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意:"><span class="nav-number">3.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-1"><span class="nav-number">3.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#D:Lizard_Era:_Beginning"><span class="nav-number">4.</span> <span class="nav-text">D:Lizard Era: Beginning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-1"><span class="nav-number">4.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解:"><span class="nav-number">4.2.</span> <span class="nav-text">题解:</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
