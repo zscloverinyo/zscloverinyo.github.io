@@ -308,8 +308,8 @@ LL a[<span class="number">5005</span>],b[<span class="number">5005</span>],c[<sp
     <span class="keyword">return</span> <span class="number">0</span>;
 }
 </code></pre><hr>
-<h1 id="B:Phillip_and_Trains">B:<a href="http://codeforces.com/contest/585/problem/B" target="_blank" rel="external">Phillip and Trains</a></h1><p>##题意：<br>给定一个3*n(n&lt;=100)的方格图,一个人处于最左端要去往最右,格子中有一些长度&gt;=2的地铁,每一秒人与车轮流行动<br>人：向右走一格 然后选择不动或者向上向下(如果可以)<br>车：向左走两格<br>任何时刻人与车不能处于同一格子 问人能不能走到最右</p>
-<p>##题解：<br>简单题 f[i][j]表示能否到达(i,j)这个格子<br>转移：若f[i][j]可达 且当前(i,j+1),(i,j+2),(i,j+3) 没车子 那么f[i][j+1]可达<br>     若f[i][j]可达 且当前(i,j+1),(i-1,j+1),(i-1,j+2),(i-1,j+3)没车子 那么f[i-1][j+1]可达<br>     若f[i][j]可达 且当前(i,j+1),(i+1,j+1),(i+1,j+2),(i+1,j+3)没车子 那么f[i+1][j+1]可达<br>处理一下最后看f[0][n],f[1][n],f[2][n]能否可达即可</p>
+<h1 id="B:Phillip_and_Trains">B:<a href="http://codeforces.com/contest/585/problem/B" target="_blank" rel="external">Phillip and Trains</a></h1><h2 id="题意：-1">题意：</h2><p>给定一个3*n(n&lt;=100)的方格图,一个人处于最左端要去往最右,格子中有一些长度&gt;=2的地铁,每一秒人与车轮流行动<br>人：向右走一格 然后选择不动或者向上向下(如果可以)<br>车：向左走两格<br>任何时刻人与车不能处于同一格子 问人能不能走到最右</p>
+<h2 id="题解：-1">题解：</h2><p>简单题 f[i][j]表示能否到达(i,j)这个格子<br>转移：若f[i][j]可达 且当前(i,j+1),(i,j+2),(i,j+3) 没车子 那么f[i][j+1]可达<br>     若f[i][j]可达 且当前(i,j+1),(i-1,j+1),(i-1,j+2),(i-1,j+3)没车子 那么f[i-1][j+1]可达<br>     若f[i][j]可达 且当前(i,j+1),(i+1,j+1),(i+1,j+2),(i+1,j+3)没车子 那么f[i+1][j+1]可达<br>处理一下最后看f[0][n],f[1][n],f[2][n]能否可达即可</p>
 <pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
 <span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
 <span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
@@ -364,7 +364,7 @@ LL a[<span class="number">5005</span>],b[<span class="number">5005</span>],c[<sp
 } 
 </code></pre><hr>
 <h1 id="C:Alice,_Bob,_Oranges_and_Apples">C:<a href="http://codeforces.com/contest/585/problem/C" target="_blank" rel="external">Alice, Bob, Oranges and Apples</a></h1><h2 id="题意:">题意:</h2><p>你有两个二元组(x1,y1),(x2,y2),每次你可以选择两种操作：<br>A:(x1,y1),(x2,y2)—&gt;(x1,y1),(x1+x2,y1+y2)<br>B:(x1,y1),(x2,y2)—&gt;(x1+x2,y1+y2),(x2,y2)<br>初始为(1,0)和(0,1)现在要求给出一个操作序列 使得达到最终态:x1+x2=n y1+y2=m<br>(n,m&lt;=1e18)</p>
-<h2 id="题解：-1">题解：</h2><p>很有趣的一道题 首先先来看无解的情况<br>若gcd(n,m)!=1 则一定无解</p>
+<h2 id="题解：-2">题解：</h2><p>很有趣的一道题 首先先来看无解的情况<br>若gcd(n,m)!=1 则一定无解</p>
 <p>我们接下来看有解的情况</p>
 <p>考虑一个2$\times$2的矩阵<br>$((x1,x2),(y1,y2))$<br>考虑B操作<br>$((x1,x2),(y1,y2)) \times ((1,0),(1,1)) = ((x1+x2,x2),(y1+y2,y2))$<br>我们令B=((1,0),(1,1))<br>考虑A操作<br>$((x1,x2),(y1,y2)) \times ((1,1),(0,1)) = ((x1,x1+x2),(y1,y1+y2))$<br>我们令A=((1,1),(0,1))<br>那么考虑一个函数F<br>$F(((x1,x2),(y1,y2))) = (y1+y2)/(x1+x2)$</p>
 <p>那么考虑一个状态S  $F(BS)=(x1+x2+y1+y2)/(x1+x2)=F(s)+1$<br>所以若$F(BS)=m/n$  $F(s)=(m-n)/n$<br>所以若$F(AS)=m/n$  $F(s)=m/(n-m)$<br>这样我们就可以知道对于任意时刻：<br>-若m&gt;n 那么第一步肯定是B 状态变为(n,m-n)<br>-若n&gt;m 那么第一部肯定是A 状态变为(n-m,m)</p>
@@ -409,7 +409,7 @@ LL n,m;
 }
 </code></pre><p>//此问题在具体数学中出现过 见具体数学第121页</p>
 <hr>
-<h1 id="D:Lizard_Era:_Beginning">D:<a href="http://codeforces.com/contest/585/problem/D" target="_blank" rel="external">Lizard Era: Beginning</a></h1><h2 id="题意：-1">题意：</h2><p>有N个任务(N&lt;=25)需要去完成 你有三个伙伴A,B,C 第N个任务带A去A的好感度会增加A[I] B,C同理<br>每个任务必须恰好带两个伙伴去完成 求一个方案使得所有任务完成后A,B,C三人的好感度相同,若存在多解输出好感度最大的</p>
+<h1 id="D:Lizard_Era:_Beginning">D:<a href="http://codeforces.com/contest/585/problem/D" target="_blank" rel="external">Lizard Era: Beginning</a></h1><h2 id="题意：-2">题意：</h2><p>有N个任务(N&lt;=25)需要去完成 你有三个伙伴A,B,C 第N个任务带A去A的好感度会增加A[I] B,C同理<br>每个任务必须恰好带两个伙伴去完成 求一个方案使得所有任务完成后A,B,C三人的好感度相同,若存在多解输出好感度最大的</p>
 <h2 id="题解:">题解:</h2><p>看N&lt;=25不难想到搜索 然而3^n依然太大<br>于是考虑折半搜索<br>3^(n/2)大概是1000000左右 可以接受<br>现在的问题就变成了合并前后状态(a1,b1,c1)与(a2,b2,c2)使得$a1+a2=b1+b2=c1+c2$<br>整理一下可以得到$a2-b2=b1-a1,a2-c2=c1-a1$<br>所以只需要满足上面这两个要求就可以满足合并后三人好感度相同的要求<br>不难想到于是问题变成前半部分直接搜索得到(a1,b1,c1)这样的三元组 将它映射到三元组(a1-b1,a1-c1,a1)<br>后半部分直接搜索得到(a2,b2,c2)三元组后 查找前半部分存在的三元组(b2-a2,c2-a2,x)中x的最大值<br>于是我们用个map存一下三元组(a1-b1,a1-c1）这样的状态对应的最大的a1即可<br>//一开始我没有搜索而是用$3^n$这样表示的状态 然而这样需要乘以10的分解复杂度就TLE了QAQ</p>
 <pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
 <span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
