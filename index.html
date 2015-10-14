@@ -195,6 +195,149 @@
           
           
             
+              <a class="post-title-link" href="/2015/10/14/325/" itemprop="url">
+                Codeforces 325
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-14T10:19:03+08:00" content="2015-10-14">
+            2015-10-14
+            
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/blog/" itemprop="url" rel="index">
+                  <span itemprop="name">blog</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/14/325/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/14/325/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>这一场前四题的题目难度还可以 下面为前四题的简易题解</p>
+<hr>
+<p>A:<a href="http://codeforces.com/contest/585/problem/A" target="_blank" rel="external">Gennady the Dentist</a></p>
+<p>题意：有N(N&lt;=4000)个孩子去看病 编号从1~n排成一列 每个孩子有三个属性v[i],d[i],p[i]表<br>v[i]表示孩子哭声的大小<br>d[i]表示孩子尖叫声的大小<br>p[i]表示孩子的忍耐度<br>每次一个孩子进去看病 发出v的哭声 后面排队的第I个孩子受到v-i+1的惊吓 忍耐度减少v-i+1<br>如果第J个孩子忍耐度&lt;0 就会发出尖叫并离开队伍 对j之后的所有孩子造成d的惊吓<br>问最后有多少孩子可以看病</p>
+<p>题解：按照题意模拟即可 有两个trick<br>1：忍耐度有可能超过INT 需要使用LL<br>2：发出V的哭声时 先是对队伍中所有孩子造成相应影响 接下来在考虑离开队伍造成的位置变化</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;
+
+<span class="keyword">int</span> n;
+LL a[<span class="number">5005</span>],b[<span class="number">5005</span>],c[<span class="number">5005</span>];
+<span class="keyword">int</span> dq,now;
+<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;
+<span class="keyword">const</span> <span class="keyword">int</span> INF=<span class="number">19950920</span>;
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">scanf</span>(<span class="string">"%I64d%I64d%I64d"</span>,&amp;a[i],&amp;b[i],&amp;c[i]);
+    dq=<span class="number">1</span>;
+    <span class="keyword">while</span> (dq&lt;=n)
+    {
+        <span class="keyword">while</span> (dq&lt;=n&amp;&amp;c[dq]&lt;<span class="number">0</span>) dq++;
+        <span class="keyword">if</span> (dq&gt;n) <span class="keyword">break</span>;
+        now=a[dq];
+        v.push_back(dq);
+        <span class="keyword">for</span> (<span class="keyword">int</span> i=dq+<span class="number">1</span>;i&lt;=n;++i)
+        {
+            <span class="keyword">if</span> (c[i]&gt;=<span class="number">0</span>)
+            {
+                c[i]-=now;    
+                now--;
+                <span class="keyword">if</span> (now==<span class="number">0</span>) <span class="keyword">break</span>;
+            }
+        }
+        <span class="keyword">for</span> (<span class="keyword">int</span> i=dq+<span class="number">1</span>;i&lt;=n;++i)
+        {
+            <span class="keyword">if</span> (c[i]&gt;=<span class="number">0</span>) <span class="keyword">continue</span>;
+            <span class="keyword">if</span> (c[i]==-INF) <span class="keyword">continue</span>;
+            c[i]=-INF;
+            <span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;++j)
+            {
+                <span class="keyword">if</span> (c[j]&gt;=<span class="number">0</span>) c[j]-=b[i]; 
+            }    
+        }
+        dq++;
+    }
+    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,v.size());
+    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;v.size();++i) <span class="built_in">printf</span>(<span class="string">"%d "</span>,v[i]);    
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/12/目前的问题/" itemprop="url">
                 目前自己存在的问题
               </a>
@@ -403,7 +546,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -417,7 +560,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
