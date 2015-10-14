@@ -251,9 +251,8 @@
         
           <span itemprop="articleBody"><p>这一场前四题的题目难度还可以 下面为前四题的简易题解</p>
 <hr>
-<p>#A:<a href="http://codeforces.com/contest/585/problem/A" target="_blank" rel="external">Gennady the Dentist</a></p>
-<p>##题意：有N(N&lt;=4000)个孩子去看病 编号从1~n排成一列 每个孩子有三个属性v[i],d[i],p[i]表<br>v[i]表示孩子哭声的大小<br>d[i]表示孩子尖叫声的大小<br>p[i]表示孩子的忍耐度<br>每次一个孩子进去看病 发出v的哭声 后面排队的第I个孩子受到v-i+1的惊吓 忍耐度减少v-i+1<br>如果第J个孩子忍耐度&lt;0 就会发出尖叫并离开队伍 对j之后的所有孩子造成d的惊吓<br>问最后有多少孩子可以看病</p>
-<p>##题解：按照题意模拟即可 有两个trick<br>1：忍耐度有可能超过INT 需要使用LL<br>2：发出V的哭声时 先是对队伍中所有孩子造成相应影响 接下来在考虑离开队伍造成的位置变化</p>
+<h1 id="A:Gennady_the_Dentist">A:<a href="http://codeforces.com/contest/585/problem/A" target="_blank" rel="external">Gennady the Dentist</a></h1><h2 id="题意：有N(N&lt;=4000)个孩子去看病_编号从1~n排成一列_每个孩子有三个属性v[i],d[i],p[i]表">题意：有N(N&lt;=4000)个孩子去看病 编号从1~n排成一列 每个孩子有三个属性v[i],d[i],p[i]表</h2><p>v[i]表示孩子哭声的大小<br>d[i]表示孩子尖叫声的大小<br>p[i]表示孩子的忍耐度<br>每次一个孩子进去看病 发出v的哭声 后面排队的第I个孩子受到v-i+1的惊吓 忍耐度减少v-i+1<br>如果第J个孩子忍耐度&lt;0 就会发出尖叫并离开队伍 对j之后的所有孩子造成d的惊吓<br>问最后有多少孩子可以看病</p>
+<h2 id="题解：按照题意模拟即可_有两个trick">题解：按照题意模拟即可 有两个trick</h2><p>1：忍耐度有可能超过INT 需要使用LL<br>2：发出V的哭声时 先是对队伍中所有孩子造成相应影响 接下来在考虑离开队伍造成的位置变化</p>
 <pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
 <span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
 <span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
