@@ -1,0 +1,924 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="Crazy" />
+
+
+
+  <meta name="keywords" content="Topcoder," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="总体来说难度适中的一场SRM~
+300:BearCries题意：给定一个长度为N(N&amp;lt;=200)的字符串 字符串中只含有”;”和”_“两种字符 一个合法的Cry表情为两个”;”中间含有至少一个”_“一个合法Cry表情为字符串的一个子串(不必在原串中连续)求题目中给出的字符串分解成若干个合法Cry表情的方案数(原字符串中的每个字符都必须出现在某个Cry表情中 并且只能出现一次)
+题解：问题可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SRM 671">
+<meta property="og:url" content="http://yoursite.com/2015/10/15/671/index.html">
+<meta property="og:site_name" content="zscloverinyo's blog">
+<meta property="og:description" content="总体来说难度适中的一场SRM~
+300:BearCries题意：给定一个长度为N(N&amp;lt;=200)的字符串 字符串中只含有”;”和”_“两种字符 一个合法的Cry表情为两个”;”中间含有至少一个”_“一个合法Cry表情为字符串的一个子串(不必在原串中连续)求题目中给出的字符串分解成若干个合法Cry表情的方案数(原字符串中的每个字符都必须出现在某个Cry表情中 并且只能出现一次)
+题解：问题可以">
+<meta property="og:updated_time" content="2015-10-15T08:11:47.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SRM 671">
+<meta name="twitter:description" content="总体来说难度适中的一场SRM~
+300:BearCries题意：给定一个长度为N(N&amp;lt;=200)的字符串 字符串中只含有”;”和”_“两种字符 一个合法的Cry表情为两个”;”中间含有至少一个”_“一个合法Cry表情为字符串的一个子串(不必在原串中连续)求题目中给出的字符串分解成若干个合法Cry表情的方案数(原字符串中的每个字符都必须出现在某个Cry表情中 并且只能出现一次)
+题解：问题可以">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+  <title> SRM 671 | zscloverinyo's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">zscloverinyo's blog</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'your-swiftype-key','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              SRM 671
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-15T15:05:03+08:00" content="2015-10-15">
+            2015-10-15
+            
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Topcoder/" itemprop="url" rel="index">
+                  <span itemprop="name">Topcoder</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/15/671/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/15/671/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>总体来说难度适中的一场SRM~</p>
+<h1 id="300:BearCries">300:BearCries</h1><h2 id="题意：">题意：</h2><p>给定一个长度为N(N&lt;=200)的字符串 字符串中只含有”;”和”_“两种字符 一个合法的Cry表情为两个”;”中间含有至少一个”_“<br>一个合法Cry表情为字符串的一个子串(不必在原串中连续)<br>求题目中给出的字符串分解成若干个合法Cry表情的方案数(原字符串中的每个字符都必须出现在某个Cry表情中 并且只能出现一次)</p>
+<h2 id="题解：">题解：</h2><p>问题可以由dp解决<br>我们考虑状态f[i][j][k]表示当前考虑到第I个字符  前面有J个”;”还未匹配”_“   有K个”;”已经匹配至少一个”_“<br>考虑第i+1个字符<br>若第i+1个字符为; 我们可以分两种情况讨论</p>
+<p>1.他和前面的某个已经至少匹配了一个”_“的”;”组合成一个合法的Cry表情<br>2.他不和前面的”;”匹配 他成为一个新的还未匹配”_“的”;”</p>
+<p>若第i+1个字符为_ 我们也可以分两种情况讨论</p>
+<p>1.他和前面某个还未匹配”_“的”;”组合成为一个已经匹配至少一个”_“的”;”<br>2.他和前面某个已经至少匹配一个”_“的”;”组合 仍然为一个至少匹配一个”_“的”;”</p>
+<p>到这里问题已经得到解决 答案即为f[n][0][0]</p>
+<h2 id="代码：">代码：</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;
+
+<span class="keyword">class</span> BearCries
+{
+    <span class="keyword">public</span>:
+    <span class="function"><span class="keyword">int</span> <span class="title">count</span><span class="params">(<span class="built_in">string</span> s)</span>
+    </span>{
+        <span class="keyword">int</span> n=s.size();
+        LL f[<span class="number">205</span>][<span class="number">205</span>][<span class="number">205</span>];
+        <span class="keyword">int</span> a[<span class="number">205</span>];
+        LL mod=<span class="number">1e9</span>+<span class="number">7</span>;
+        <span class="keyword">int</span> ans;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i) <span class="keyword">if</span> (s[i]==<span class="string">';'</span>) a[i+<span class="number">1</span>]=<span class="number">1</span>;<span class="keyword">else</span> a[i+<span class="number">1</span>]=<span class="number">0</span>;
+        <span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));
+        f[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)
+            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=n;++j)
+                <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=n;++k)
+                {
+                    <span class="comment">// f[j][k]  j not has k  has</span>
+                    <span class="keyword">if</span> (a[i]==<span class="number">1</span>)
+                    {
+                        f[i][j+<span class="number">1</span>][k]+=f[i-<span class="number">1</span>][j][k],f[i][j+<span class="number">1</span>][k]%=mod;
+                        <span class="keyword">if</span> (k&gt;=<span class="number">1</span>) f[i][j][k-<span class="number">1</span>]+=k*f[i-<span class="number">1</span>][j][k]%mod,f[i][j][k-<span class="number">1</span>]%=mod;
+                    }
+                    <span class="keyword">else</span>
+                    {
+                        f[i][j][k]+=k*f[i-<span class="number">1</span>][j][k]%mod,f[i][j][k]%=mod;
+                        <span class="keyword">if</span> (j&gt;=<span class="number">1</span>) f[i][j-<span class="number">1</span>][k+<span class="number">1</span>]+=j*f[i-<span class="number">1</span>][j][k]%mod,f[i][j-<span class="number">1</span>][k+<span class="number">1</span>]%=mod;    
+                    }
+                }
+        <span class="built_in">cout</span>&lt;&lt;f[<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>]&lt;&lt;endl;
+        ans=f[n][<span class="number">0</span>][<span class="number">0</span>];
+        <span class="keyword">return</span> ans;
+    }
+};
+</code></pre><h1 id="500:_BearDarts">500: BearDarts</h1><h2 id="题意：-1">题意：</h2><p>给定一个含有N(N&lt;=1000)个元素的数组w 求有多少四元组(i,j,p,q)满足 </p>
+<ul>
+<li>i&lt;j&lt;p&lt;q </li>
+<li>$w[i] \times w[p]$=$w[j] \times w[q]$</li>
+</ul>
+<h2 id="题解">题解</h2><p>为了方便我们令$a=w[i]$ $b=w[j]$ $c=w[p]$ $d=w[q]$<br>我们先来枚举a和b 那么问题就变成了有多少对(c,d)满足条件<br>$a \times c$=$b \times d$<br>于是 $a / b$=$d / c$<br>于是我们可以枚举a,b,查找后面有多少个数对满足条件啦！<br>具体实现和我的上一篇日志CF 325 的D题很像,用个map就好啦</p>
+<h2 id="代码">代码</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;
+
+<span class="keyword">class</span> BearDarts
+{
+    <span class="keyword">public</span>:
+    <span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">count</span><span class="params">(<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; w)</span>
+    </span>{
+        <span class="keyword">int</span> n,a,b,c,d,z;
+        <span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;,LL&gt; mp;
+        LL ans=<span class="number">0</span>;
+        n=w.size();
+        c=w[n-<span class="number">2</span>];d=w[n-<span class="number">1</span>];
+        z=__gcd(c,d);
+        mp[make_pair(c/z,d/z)]++;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i=n-<span class="number">3</span>;i&gt;=<span class="number">1</span>;--i)
+        {
+            b=w[i];
+            <span class="keyword">for</span> (<span class="keyword">int</span> j=i-<span class="number">1</span>;j&gt;=<span class="number">0</span>;--j)
+            {
+                a=w[j];
+                <span class="comment">//ac=bd</span>
+                <span class="comment">//a/b=d/c</span>
+                z=__gcd(a,b);
+                ans+=mp[make_pair(b/z,a/z)];        
+            }
+            c=w[i];
+            <span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;n;++j)
+            {
+                d=w[j];
+                z=__gcd(c,d);
+                mp[make_pair(c/z,d/z)]++;
+            }
+        }
+        <span class="keyword">return</span> ans;
+    }
+};
+</code></pre><h1 id="900:_BearDestroys">900: BearDestroys</h1><h2 id="题意:">题意:</h2><p>给一个n$\times$m的方格图(n&lt;=13,m&lt;=30),每个格子可以写E或者S,所以一共有2^(n$\times$m)种图<br>一个人从(0,0)开始行优先行动 即从(0,0)-&gt;(0,m-1)-&gt;(1,0)-&gt;(1,m-1)-&gt;….-&gt;(n-1,0)-&gt;(n-1,m-1)<br>每次他到一个格子(i,j) 他执行以下操作：<br>1.如果该格子已经放置了骨牌 那么不做任何操作去下一格子<br>2.若该格子没有放置骨牌 该格子写的是E 那么如果他能放置一块1$\times$2的骨牌覆盖(i,j) (i,j+1) 则用1$\times$2的骨牌覆盖(i,j)(i,j+1) 否则如果他能放置一块2$\times$1的骨牌覆盖(i,j) (i+1,j) 则用2$\times$1的骨牌覆盖(i,j) (i+1,j)<br>3.若该格子没有放置骨牌 该格子写的是S 那么如果他能放置一块2$\times$1的骨牌覆盖(i,j) (i+1,j) 则用2$\times$1的骨牌覆盖(i,j)(i+1,j) 否则如果他能放置一块1$\times$2的骨牌覆盖(i,j) (i,j+1) 则用1$\times$2的骨牌覆盖(i,j) (i,j+1)</p>
+<p>直到他到达(n-1,m-1) </p>
+<p>一个图的得分为放置的骨牌数量 </p>
+<p>求这2^(n$\times$m)种图的得分的和对MOD取余</p>
+<h2 id="题解：-1">题解：</h2><p>看到n&lt;=13不难想到要状态压缩,然后我们来分析下放置骨牌的情况<br>我们考虑一下骨牌占得两个格子的位置 可以发现无论是1$\times$2的骨牌还是2$\times$1的骨牌 两个格子的坐标之和的差总是1</p>
+<p>所以我们考虑将方格图分层<br>比如一个3$\times$4的方格图 可以分为6层(0~5)</p>
+<p>0123<br>1234<br>2345</p>
+<p>于是每层有最多N个元素 我们来对这N个元素进行状态压缩</p>
+<p>对于一个状态now 若now的二进制表示第I位为1 则表示该格子已经被骨牌覆盖了 如果为0则为没覆盖</p>
+<p>那么考虑dp:<br>f[i][j]表示到了第I层 第I层的状态为J时候的骨牌数量的总和<br>g[i][j]表示到了第I层 第I层的状态为J时候这种图的数量</p>
+<p>考虑转移的时候比较麻烦 这里考虑从now状态可以转移到哪些next状态<br>对now状态每一行进行讨论</p>
+<p>若now状态第r行为1 此时证明改格子已经被覆盖 那么他填E或S都无所谓 直接转移</p>
+<p>接下来就是该格子未被覆盖的情况了 </p>
+<p>如果现在改格子右方已被覆盖(即next状态第r行为1)</p>
+<p>此时无论该格子填E还是填S 他都是被2$\times$1的骨牌覆盖 将next状态第r+1行标志为1进行转移</p>
+<p>如果现在该格子右方未被覆盖</p>
+<p>此时如果该格子填E那么将next状态第R行标志为1进行转移</p>
+<p>此时如果该格子填S那么将next状态第R+1行标志位1进行转移</p>
+<p>这样进行转移更新后答案即为f[n+m-1][0]</p>
+<p>具体的转移以及边界看代码有一些帮助</p>
+<h2 id="代码-1">代码</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;queue&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;map&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span>
+<span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;
+
+<span class="keyword">class</span> BearDestroys
+{
+    <span class="keyword">public</span>:
+    <span class="keyword">int</span> w,h,mod;
+    <span class="keyword">int</span> f[<span class="number">50</span>][<span class="number">10000</span>];
+    <span class="keyword">int</span> g[<span class="number">50</span>][<span class="number">10000</span>];
+    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> r,<span class="keyword">int</span> sum,<span class="keyword">int</span> now,<span class="keyword">int</span> next,<span class="keyword">int</span> ff,<span class="keyword">int</span> gg)</span>
+    </span>{
+        <span class="keyword">if</span> (r==h)
+        {
+            f[sum+<span class="number">1</span>][next]=(f[sum+<span class="number">1</span>][next]+ff)%mod;
+            g[sum+<span class="number">1</span>][next]=(g[sum+<span class="number">1</span>][next]+gg)%mod;
+            <span class="keyword">return</span>;
+        }
+        <span class="keyword">int</span> c=sum-r;
+        <span class="keyword">if</span> (<span class="number">0</span>&lt;=c&amp;&amp;c&lt;=w-<span class="number">1</span>)
+        {
+            <span class="keyword">if</span> (now&amp;(<span class="number">1</span>&lt;&lt;r))
+            {
+                dfs(r+<span class="number">1</span>,sum,now,next,ff*<span class="number">2</span>%mod,gg*<span class="number">2</span>%mod);
+            }
+            <span class="keyword">else</span>
+            {
+                <span class="keyword">if</span> ((c==w-<span class="number">1</span>)||(next&amp;(<span class="number">1</span>&lt;&lt;r)))
+                {
+                    <span class="keyword">if</span> (r==h-<span class="number">1</span>)
+                    {
+                        dfs(r+<span class="number">1</span>,sum,now,next,ff*<span class="number">2</span>%mod,gg*<span class="number">2</span>%mod);
+                    }
+                    <span class="keyword">else</span>
+                    {
+                        dfs(r+<span class="number">1</span>,sum,now,next+(<span class="number">1</span>&lt;&lt;(r+<span class="number">1</span>)),(ff*<span class="number">2</span>%mod+gg*<span class="number">2</span>%mod)%mod,gg*<span class="number">2</span>%mod);
+                    }
+                }
+                <span class="keyword">else</span>
+                {
+                    <span class="keyword">if</span> (r==h-<span class="number">1</span>)
+                    {
+                        dfs(r+<span class="number">1</span>,sum,now,next+(<span class="number">1</span>&lt;&lt;r),(ff*<span class="number">2</span>%mod+gg*<span class="number">2</span>%mod)%mod,gg*<span class="number">2</span>%mod);
+                    }    
+                    <span class="keyword">else</span>
+                    {
+                        dfs(r+<span class="number">1</span>,sum,now,next+(<span class="number">1</span>&lt;&lt;r),(ff+gg)%mod,gg);
+                        dfs(r+<span class="number">1</span>,sum,now,next+(<span class="number">1</span>&lt;&lt;(r+<span class="number">1</span>)),(ff+gg)%mod,gg);
+                    }
+                }    
+            }
+        }
+        <span class="keyword">else</span>
+        {
+            dfs(r+<span class="number">1</span>,sum,now,next,ff,gg);
+        }
+    }
+    <span class="function"><span class="keyword">int</span> <span class="title">sumUp</span><span class="params">(<span class="keyword">int</span> W, <span class="keyword">int</span> H, <span class="keyword">int</span> MOD)</span>
+    </span>{
+        w=W;h=H;mod=MOD;
+        <span class="keyword">int</span> s=w-<span class="number">1</span>+h-<span class="number">1</span>;
+        <span class="built_in">memset</span>(f,<span class="number">0</span>,<span class="keyword">sizeof</span>(f));
+        <span class="built_in">memset</span>(g,<span class="number">0</span>,<span class="keyword">sizeof</span>(g));
+        f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">0</span>;g[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=s;++i)
+        {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;(<span class="number">1</span>&lt;&lt;h);++j)
+            {
+                <span class="keyword">if</span> (f[i][j]==<span class="number">0</span>&amp;&amp;g[i][j]==<span class="number">0</span>) <span class="keyword">continue</span>;
+                dfs(<span class="number">0</span>,i,j,<span class="number">0</span>,f[i][j],g[i][j]);
+            }
+        }
+        <span class="keyword">return</span> f[s+<span class="number">1</span>][<span class="number">0</span>];
+    }
+};
+</code></pre></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Topcoder/" rel="tag">#Topcoder</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/14/325/" rel="next">Codeforces 325</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/10/15/671/"
+                   data-title="SRM 671" data-url="http://yoursite.com/2015/10/15/671/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="http://codeforces.com/userphoto/title/zscloverinyo/photo.jpg" alt="zscloverinyo" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zscloverinyo</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Crazy</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zscloverinyo" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2383144825/" target="_blank">weibo</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://mlz000.github.io/" target="_blank">萌神</a>
+              </span>
+            
+              <span class="links-of-author-item">
+              <a href="http://bephbin.com/" target="_blank">萌萌哒小学生</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#300:BearCries"><span class="nav-number">1.</span> <span class="nav-text">300:BearCries</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意："><span class="nav-number">1.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解："><span class="nav-number">1.2.</span> <span class="nav-text">题解：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码："><span class="nav-number">1.3.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#500:_BearDarts"><span class="nav-number">2.</span> <span class="nav-text">500: BearDarts</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-1"><span class="nav-number">2.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解"><span class="nav-number">2.2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#900:_BearDestroys"><span class="nav-number">3.</span> <span class="nav-text">900: BearDestroys</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意:"><span class="nav-number">3.1.</span> <span class="nav-text">题意:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-1"><span class="nav-number">3.2.</span> <span class="nav-text">题解：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码-1"><span class="nav-number">3.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zscloverinyo</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zscloverinyo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
